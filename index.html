@@ -835,17 +835,9 @@
                 right: 0 !important;
             }
 
-            /* Editorial */
-            .editorial-headline { font-size: 32px; letter-spacing: 3px; }
-            .editorial-subhead { font-size: 16px; }
-            .editorial-body { font-size: 15px; }
-
-            /* About accordion */
+            /* Accordion links (About & Editorial) */
             .accordion-link { font-size: 18px; letter-spacing: 3px; }
-            #about-accordion { padding-right: 0; }
-
-            /* Nav arrows */
-            .editorial-nav-arrows { right: 30px; bottom: 40px; }
+            #about-accordion, #editorial-accordion { padding-right: 0; }
 
             /* Back link */
             .back-link { font-size: 12px; letter-spacing: 1px; }
@@ -855,11 +847,6 @@
 
             /* Film iframe */
             .video-left-panel iframe { height: 56.25vw; }
-
-            /* Arrow slide-out on mobile */
-            .editorial-nav-arrows.panel-closing {
-                right: -100vw;
-            }
         }
 
         @media (min-width: 769px) and (max-width: 1024px) {
@@ -935,95 +922,10 @@
         }
 
 
-        /* Editorial content styles */
-        #editorial-content {
+        /* Editorial accordion styles (shares .accordion-link / .accordion-body with About) */
+        #editorial-accordion {
             display: none;
-            flex-direction: column;
-            flex: 1;
-        }
-
-        .editorial-headline {
-            font-family: 'Archivo Expanded', sans-serif;
-            font-size: 56px;
-            font-weight: 200;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            color: var(--accent-color);
-            margin: 0 0 0.5em 0;
-            line-height: 1.1;
-        }
-
-        .editorial-subhead {
-            font-family: 'Inter', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: inherit;
-            margin: 0 0 1.5em 0;
-            line-height: 1.4;
-        }
-
-        .editorial-body {
-            font-family: 'Inter', sans-serif;
-            font-size: 16px;
-            line-height: 1.7;
-            color: #666;
-        }
-
-        .editorial-body p {
-            margin: 0 0 1.2em 0;
-        }
-
-        .editorial-body p:last-child {
-            margin-bottom: 0;
-        }
-
-        .editorial-nav-arrows {
-            position: fixed;
-            right: 60px;
-            bottom: 80px;
-            display: none;
-            flex-direction: column;
-            gap: 20px;
-            align-items: center;
-            z-index: 600;
-            opacity: 0;
-            transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
-        }
-        .editorial-nav-arrows.panel-closing {
-            right: -50vw;
-        }
-
-        @keyframes editSlideOutUp {
-            from { transform: translateY(0); opacity: 1; }
-            to   { transform: translateY(-24px); opacity: 0; }
-        }
-        @keyframes editSlideOutDown {
-            from { transform: translateY(0); opacity: 1; }
-            to   { transform: translateY(24px); opacity: 0; }
-        }
-        @keyframes editSlideInUp {
-            from { transform: translateY(24px); opacity: 0; }
-            to   { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes editSlideInDown {
-            from { transform: translateY(-24px); opacity: 0; }
-            to   { transform: translateY(0); opacity: 1; }
-        }
-
-        #editorial-content.edit-out-up   { animation: editSlideOutUp   0.22s ease forwards; }
-        #editorial-content.edit-out-down { animation: editSlideOutDown 0.22s ease forwards; }
-        #editorial-content.edit-in-up    { animation: editSlideInUp    0.22s ease forwards; }
-        #editorial-content.edit-in-down  { animation: editSlideInDown  0.22s ease forwards; }
-
-        .editorial-nav-arrows a {
-            font-size: 1.2em;
-            text-decoration: none;
-            color: inherit;
-            transition: color 0.2s;
-        }
-
-        .editorial-nav-arrows a:hover {
-            color: var(--accent-color);
+            padding-right: 60px;
         }
 
         /* About accordion styles */
@@ -1040,7 +942,7 @@
             text-transform: uppercase;
             color: var(--text-color);
             text-decoration: none;
-            display: block;
+            display: inline-block;
             padding: 0;
             transition: color 0.3s ease;
             cursor: none;
@@ -1308,18 +1210,8 @@
             <a href="#" class="back-link" id="next-image-btn">&#8594;</a>
         </div>
 
-        <!-- Editorial-specific content -->
-        <div id="editorial-content">
-            <h2 class="editorial-headline" id="editorial-headline"></h2>
-            <p class="editorial-subhead" id="editorial-subhead"></p>
-            <div class="editorial-body" id="editorial-body"></div>
-        </div>
-
-        <!-- Editorial vertical nav arrows -->
-        <div class="editorial-nav-arrows" id="editorial-nav">
-            <a href="#" id="editorial-prev">&#8593;</a>
-            <a href="#" id="editorial-next">&#8595;</a>
-        </div>
+        <!-- Editorial accordion list -->
+        <div id="editorial-accordion"></div>
     </div>
 
     <div class="page-overlay" id="about-page">
@@ -1687,97 +1579,94 @@
         // Editorial items — each has headline, subhead, body (HTML string)
         const editorialItems = [
             {
-                headline: "The UN",
-                subhead: "A speech for the UN’s Under-Secretary-General for Humanitarian Affairs to launch our new creative platform, One Life at a Time. Here’s the ending.",
-                body: "<p>Yes, it\u2019s abundantly clear that the old humanitarian model is no longer fit for purpose.</p><p>But the scale of the challenge tries to convince us that it\u2019s insurmountable. That crisis and cruelty cannot be contained. That aid itself is a relic of a bygone era.</p><p>We reject that premise.</p><p>We\u2019ve seen how a single donation can ricochet through a community. We\u2019ve seen chaos chastened by joy and tragedy subverted by humanity.</p><p>Consider Safi, an amputee who stepped on a mine on the way to football practice. Now fitted with a prosthetic leg, he\u2019s a Picasso of penalties repainting his kit with mud stains.</p><p>Or Ahmad, a single father-of-one who lost track of his daughter in the heat of conflict. Reunited once more, he puts uncoordinated dads to shame with faultless TikTok choreography.</p><p>It\u2019s true that you can\u2019t end every crisis. But you can end someone\u2019s. Small acts compound, transforming individual action into collective momentum.</p><p>This year, we\u2019re raising $23 billion to save 87 million more lives just like Safi and Ahmad\u2019s.</p><p>With your donation, we\u2019ll remodel humanitarian aid for an entirely new era.</p><p>One day at a time.<br>One step at a time.<br>One life at a time.</p>"
-            },
-            {
-                headline: "Finimize",
+                label: "Finimize 1",
                 subhead: "I wrote daily newsletters at Finimize, a news startup for people who don\u2019t speak finance.",
                 body: "<p>In two separate lawsuits, the US antitrust regulator and almost every US state alleged that Meta has a monopoly in the social networking market. They\u2019re claiming the company has either bought or tried to buy smaller firms in a bid to snuff them out before they get a chance to live up to their competitive potential. More specifically, they\u2019re targeting two of Facebook\u2019s flagship acquisitions \u2013 Instagram and WhatsApp \u2013 in hopes the company will be forced to unwind them altogether.</p><p>Meta, for its part, invoked the playground-legislated \u201cno takey-backsies\u201d statute: the company pointed out that both acquisitions were approved in 2012 and 2014 by the very same regulators now suing them, and that this whole thing is just an excuse for a do-over.</p><p>Investigations into Big Tech are launching left, right and centre these days, but this lawsuit makes Meta the first of the bunch to be hit with a breakup order. Investors might want to keep things in perspective, mind you. If lawmakers\u2019 last notable attempt to break up a company \u2013 namely Microsoft in 1998 \u2013 is anything to go by, this whole saga will play out like a hot night with Zuckerberg: a drawn-out process with a profoundly anticlimactic ending.</p>"
             },
             {
-                headline: "Finimize",
+                label: "Finimize 2",
                 subhead: "",
                 body: "<p>If this pandemic has made us connoisseurs of anything, it\u2019s sitting, sleeping and curling up in the foetal position as we sing \u201cThe sun\u2019ll come out\u2026 tomorrow\u2026\u201d through broken sobs. So it makes sense that out of the ashes of this sedentary lifestyle, MADE should\u2019ve emerged keener than ever to debut on the FTSE 250.</p><p>The company\u2019s plan is to reinvest the money it makes from the IPO into the business, quadruple its annual sales by the end of 2025, and expand beyond its current Europe-centric focus. The paperwork didn\u2019t mention what valuation Made is targeting, but reports have put it around the $1.4 billion mark. That\u2019s three times last year\u2019s sales, and ahead of long-term German rival Westwing.</p><p>This has come at a good time for the UK, where last quarter\u2019s record number of IPOs has been drying up fast. As for why, pick your poison: inflation-fueled market turbulence, the souring mood towards high-growth companies, or the profound disappointment of Bumble, whose recently listed shares have already dropped below their IPO price. As long as there\u2019s potential for a lukewarm reception, companies aren\u2019t about to risk selling their shares on the cheap.</p>"
             },
             {
-                headline: "Finimize",
+                label: "Finimize 3",
                 subhead: "",
                 body: "<p>Bitcoin\u2019s value has fallen another 20% in May, which means it\u2019s now 55% down from its November peak \u2013 the fifth-ever drop of this size. But if you\u2019re rushing to buy the dip, feel free to move at a leisurely pace: bitcoin can spend an awfully long time licking its wounds.</p><p>The OG crypto tends to have these \u201csaucer-shaped\u201d recoveries that look very different from the \u201cV-shaped\u201d bouncebacks you generally see in traditional markets. Bitcoin, put simply, has barely moved for at least 180 days after every other drawdown of this size in history. So even if you bought in early, you\u2019d have made next to nothing for months.</p><p>It\u2019s not entirely clear why bitcoin languishes for so long, but there is one popular theory. The bitcoin market is much smaller than traditional markets, meaning its biggest buyers \u2013 \u201cwhales\u201d \u2013 have much more influence over its price. They exert this influence in multiple ways, but in this case, to keep its price low after the dip.</p><p>It\u2019s in their interests to do just that: if they were to, say, try to buy 10,000 bitcoin right off the bat, their order wouldn\u2019t be fulfilled until there were enough sellers to meet their demand. And when there eventually were, the price they pay might be far less favourable than the one they wanted.</p><p>But if they can keep bitcoin\u2019s price low, stock up gradually, and wait for enough sellers to come out of the woodwork, they could buy huge quantities further down the line. That would drive up the price of bitcoin and take their new stockpile with it.</p><p>So if that\u2019s their motivation again here, you can rest easy knowing that you\u2019re not the Wile E. Coyote to bitcoin\u2019s Roadrunner in this situation. Just recline on a deck chair and watch as the OG crypto \u2013 and other investors \u2013 keep running headlong into a tunnel painted on a brick wall.</p>"
             },
             {
-                headline: "Relic",
+                label: "Relic 1",
                 subhead: "Relic was a company specialising in access to alternative, non-traditional financial assets – think Pokemon cards, wines, cars etc. The CEO reached out to me to ask me to write their monthly newsletter on a freelance basis.",
                 body: "<p>Hey all.</p><p>It’s the moment you’ve waited millennia for, ever since you pulled yourself with shaky forelegs and ragged breath out of the primordial soup. You glanced at the semi-developed lifeform next to you and nodded knowingly, confident that one day you’d both be able to invest in a first edition of Darwin’s On the Origin of Species via UK fractional investing platform Showpiece. And here you are, with the long-awaited chance to do exactly that.</p><p><strong>🐒 The opportunity</strong></p><p>What a relief Showpiece developed hind legs, because it’s walking the walk: it’s giving you the chance to buy into a first edition of Darwin’s On the Origin of Species. The book is valued at £275,000, but you can buy in for a very reasonable price even by fractional platform standards: £50 a share. That price point might be why there are only around 57% left at the time of writing.</p><p><strong>🐒 The market</strong></p><p>Valuable books are one of the more reliable alternative assets out there. You’re not likely to make astronomical gains from one year to the next like you might in, say, the trading card market, but you’re also less likely to see big dips in value. So if you’re looking for steady appreciation over a number of years, first editions might be for you.</p><p>The market’s also different from trading cards insofar as there’s no standardised grading system. In other words, it’s much harder to compare two identical assets like for like. That means it’s a very subjective process, where one dealer may grade a book as being in “good” condition where another considers it “very good”. After all, dealers have different specialties, different levels of experience and different expectations for particular books. They also might’ve paid different amounts for comparable copies.</p><p>All this is to say, a lack of standardisation means there’s going to be more variation between valuations. Fortunately, Showpiece uses reputable authenticators and valuers, so you’re in good hands on that front.</p><p><strong>🐒 The investment</strong></p><p>Darwin’s On the Origin of Species was first published in 1859, forming the foundation of evolutionary biology and bringing the idea of natural selection into the mainstream. Little wonder, then, that it’s become such an in-demand piece of work.</p><p>Luxury auctioneer Christie’s – which has been responsible for the sale of multiple On the Origins – has tracked the first edition’s performance since 2012, with the last decade having seen a steady uptick. There was also an unusual spike last year, which might have something to do with a sudden fervour for alternative investments in the face of rocketing inflation. By that token, you shouldn’t be too worried about the drop-off we’ve seen this year: it’s more-or-less just corrected back to levels it would’ve been at in more normal times.</p><p><strong>🐒 The final verdict</strong></p><p>Showpiece’s copy is at a higher price point than the last three sales, but it’s at a good entry point compared to the 10-year average. And while a less expensive copy might pop up as we head into tougher economic times, you’re unlikely to find it on a fractional investing platform. It hasn’t featured on any US platforms yet, which is notable given that there are far more offerings over there than there are on UK platforms.</p><p>What’s more, in a market where there’s no agreed-upon standard for valuations, the best thing you can do is to get good advice from reputable book dealers – and that’s exactly what Showpiece offers. With that, the low share price and the wider valuable book market in mind, there’s good reason to buy in. How’s that for natural selection?</p><p>That’s all from us. Catch you next week.</p><p>The Relic Team</p>"
             },
             {
-                headline: "Relic",
+                label: "Relic 2",
                 subhead: "",
                 body: "<p>Hey all.</p><p>The pound’s been cruising for a bruising lately, with the currency tumbling to an all-time low against the US dollar last week. And while it’s bounced back in the last few days, we’re still a far cry from where we were at the start of the year.</p><p>But with most of the focus on the impact on traditional assets, we thought we’d take a closer look at what all this means for the alternatives market.</p><p><strong>💵 The recap</strong></p><p>The UK government has taken a novel approach to the inflation crisis, unveiling a sweep of unfunded tax reforms that lowered the basic rate and abolished the top rate altogether. The prospect that the UK would suddenly be awash with consumer cash and heavy with national debt shook confidence in the country’s economy, causing the pound to collapse 2% against the dollar.</p><p>But the response didn’t put the government off: it doubled down over the weekend, and even promised “more to come”. That sent the pound tumbling another 5% against the dollar, with the Bank of England refusing to step in and roll out emergency action. And while chancellor Kwasi Kwarteng finally pulled a U-turn on Monday, the sudden loss of confidence in the pound might well have lasting repercussions.</p><p><strong>💵 The kicker</strong></p><p>The kicker here is that the pound is up against a dollar that’s going from strength to strength. The Fed, after all, has been raising its key interest rate at a serious clip, making the dollar more appealing to international savers and investors. What’s more, the greenback is a safe haven in times of economic uncertainty, which is exactly where we find ourselves today: China’s zero-covid policy, the war in Ukraine, and widespread energy crises are just a few factors that risk tipping the global economy into recession.</p><p><strong>💵 The impact</strong></p><p>The impact of the currency crisis will be felt far and wide, but there’s a couple of things to bear in mind as far as the alternatives market goes. For one thing, British sellers of everything from trading cards to fine wine will be on the lookout for American buyers, whose dollars are now looking all the more appealing. British buyers, meanwhile, might opt to steer clear of dollar-denominated collectibles, given that their cash won’t go nearly as far. That could weigh on demand going forward.</p><p>Also worth noting is that the British companies responsible for grading collectibles – think Beckett and PSA – are already raising their fees to offset the poor exchange rate. That’s unlikely to impact demand for the highest-end goods, but it’s likely to have a negative effect on the low-to-middle end.</p><p><strong>💵 The final verdict</strong></p><p>The pound might have recovered in the last few days, but it’s not a particularly meaningful move when you consider the currency’s overall performance this year. Consider too that the short-term outlook is seriously unpredictable, with plenty of volatility still to come. So if you’re looking to buy or sell, you’ll want to be cautious about it.</p><p>If you are keen to invest in these choppy times, you might want to think about buying in US dollars, storing your assets over there and selling them on Stateside markets. That way you won’t be exposed to the ebbs and flows of sterling, no matter what the government decides to do next.</p><p>That’s all from us. See you next week.</p><p>The Relic Team</p>"
+            },
+            {
+                label: "The UN",
+                subhead: "A speech for the UN’s Under-Secretary-General for Humanitarian Affairs to launch our new creative platform, One Life at a Time. Here’s the ending.",
+                body: "<p>Yes, it\u2019s abundantly clear that the old humanitarian model is no longer fit for purpose.</p><p>But the scale of the challenge tries to convince us that it\u2019s insurmountable. That crisis and cruelty cannot be contained. That aid itself is a relic of a bygone era.</p><p>We reject that premise.</p><p>We\u2019ve seen how a single donation can ricochet through a community. We\u2019ve seen chaos chastened by joy and tragedy subverted by humanity.</p><p>Consider Safi, an amputee who stepped on a mine on the way to football practice. Now fitted with a prosthetic leg, he\u2019s a Picasso of penalties repainting his kit with mud stains.</p><p>Or Ahmad, a single father-of-one who lost track of his daughter in the heat of conflict. Reunited once more, he puts uncoordinated dads to shame with faultless TikTok choreography.</p><p>It\u2019s true that you can\u2019t end every crisis. But you can end someone\u2019s. Small acts compound, transforming individual action into collective momentum.</p><p>This year, we\u2019re raising $23 billion to save 87 million more lives just like Safi and Ahmad\u2019s.</p><p>With your donation, we\u2019ll remodel humanitarian aid for an entirely new era.</p><p>One day at a time.<br>One step at a time.<br>One life at a time.</p>"
             }
         ];
-        let currentEditorialIndex = 0;
 
-        function showEditorialItem(index) {
-            if (!editorialItems.length) return;
-            const item = editorialItems[index];
-            document.getElementById('editorial-headline').textContent = item.headline;
-            const subheadEl = document.getElementById('editorial-subhead');
-            subheadEl.textContent = item.subhead;
-            subheadEl.style.display = item.subhead ? 'block' : 'none';
-            document.getElementById('editorial-body').innerHTML = item.body;
-            const nav = document.getElementById('editorial-nav');
-            if (nav && editorialItems.length > 1) {
-                nav.classList.remove('panel-closing');
-                nav.style.opacity = '0';
-                nav.style.right = '-50vw';
-                nav.style.display = 'flex';
-                requestAnimationFrame(() => requestAnimationFrame(() => { nav.style.right = '60px'; }));
-            } else if (nav) {
-                nav.style.display = 'none';
-            }
-            const panel = document.getElementById('right-detail-panel');
-            if (panel) panel.scrollTop = 0;
-            setTimeout(updateEditorialArrowsVisibility, 50);
+        function buildEditorialAccordion() {
+            const container = document.getElementById('editorial-accordion');
+            container.innerHTML = '';
+            editorialItems.forEach((item, i) => {
+                const div = document.createElement('div');
+                div.className = 'accordion-item';
+
+                const link = document.createElement('a');
+                link.href = '#';
+                link.className = 'accordion-link';
+                link.setAttribute('data-index', i);
+                link.textContent = item.label;
+                link.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                link.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+
+                const body = document.createElement('div');
+                body.className = 'accordion-body';
+                body.innerHTML = (item.subhead ? `<p><em>${item.subhead}</em></p>` : '') + item.body;
+
+                div.appendChild(link);
+                div.appendChild(body);
+                container.appendChild(div);
+            });
         }
 
+        document.getElementById('editorial-accordion').addEventListener('click', (e) => {
+            const link = e.target.closest('.accordion-link');
+            if (!link) return;
+            e.preventDefault();
+            const body = link.nextElementSibling;
+            const isOpen = body.classList.contains('open');
+            // Collapse all open items using exact current height for equal-speed transition
+            document.querySelectorAll('#editorial-accordion .accordion-body.open').forEach(b => {
+                b.style.maxHeight = b.scrollHeight + 'px';
+                requestAnimationFrame(() => { b.style.maxHeight = '0'; });
+                b.classList.remove('open');
+            });
+            document.querySelectorAll('#editorial-accordion .accordion-link.active').forEach(l => l.classList.remove('active'));
+            if (!isOpen) {
+                body.style.maxHeight = body.scrollHeight + 'px';
+                body.classList.add('open');
+                link.classList.add('active');
+            }
+        });
+
         function openEditorialPanel() {
-            document.getElementById('detail-panel-title').style.display = 'none';
             document.querySelector('.detail-description').style.display = 'none';
             document.getElementById('panel-arrows').style.display = 'none';
-            document.getElementById('editorial-content').style.display = 'flex';
-            currentEditorialIndex = 0;
-            showEditorialItem(0);
+            buildEditorialAccordion();
+            document.getElementById('editorial-accordion').style.display = 'block';
         }
 
         function closeEditorialPanel() {
-            // Only clean up editorial-specific elements
-            document.getElementById('editorial-content').style.display = 'none';
-            const nav = document.getElementById('editorial-nav');
-            nav.style.display = 'none';
-            nav.style.opacity = '0';
+            const acc = document.getElementById('editorial-accordion');
+            acc.style.display = 'none';
+            acc.innerHTML = '';
         }
-        function updateEditorialArrowsVisibility() {
-            const nav = document.getElementById('editorial-nav');
-            if (!nav || nav.style.display !== 'flex') return;
-            const panel = document.getElementById('right-detail-panel');
-            const nearBottom = panel.scrollTop + panel.clientHeight >= panel.scrollHeight - 60;
-            const noOverflow = panel.scrollHeight <= panel.clientHeight + 10;
-            const show = nearBottom || noOverflow;
-            if (show) {
-                nav.style.transition = 'right 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease';
-                nav.style.opacity = '1';
-            } else {
-                nav.style.transition = 'right 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
-                nav.style.opacity = '0';
-            }
-            nav.style.pointerEvents = show ? 'auto' : 'none';
-        }
-
-        document.getElementById('right-detail-panel').addEventListener('scroll', () => {
-            if (activeCampaignId === '12') updateEditorialArrowsVisibility();
-        });
 
         function updateGalleryImage() {
             if (!activeCampaignId) return;
@@ -1940,13 +1829,9 @@
             updateGalleryImage();
             document.getElementById('right-detail-panel').classList.remove('active');
             activeCampaignId = null;
-            // Slide arrows out in sync with panel
-            const editNav = document.getElementById('editorial-nav');
-            editNav.classList.add('panel-closing');
+            closeEditorialPanel();
             // Wait for slide-out animation to finish before resetting content
             setTimeout(() => {
-                closeEditorialPanel();
-                editNav.classList.remove('panel-closing');
                 resetFilmPanel(lastCampaignId);
             }, 500);
         });
@@ -1975,33 +1860,6 @@
             const imgs = campaignImages[activeCampaignId];
             currentGalleryIndex = (currentGalleryIndex - 1 + imgs.length) % imgs.length;
             updateGalleryImage();
-        });
-
-        // Editorial up/down navigation with animation
-        function navigateEditorial(direction) {
-            const el = document.getElementById('editorial-content');
-            const outClass = direction === 'next' ? 'edit-out-up' : 'edit-out-down';
-            const inClass  = direction === 'next' ? 'edit-in-up'  : 'edit-in-down';
-            el.classList.add(outClass);
-            setTimeout(() => {
-                el.classList.remove(outClass);
-                currentEditorialIndex = direction === 'next'
-                    ? (currentEditorialIndex + 1) % editorialItems.length
-                    : (currentEditorialIndex - 1 + editorialItems.length) % editorialItems.length;
-                showEditorialItem(currentEditorialIndex);
-                el.classList.add(inClass);
-                setTimeout(() => el.classList.remove(inClass), 220);
-            }, 220);
-        }
-
-        document.getElementById('editorial-prev').addEventListener('click', (e) => {
-            e.preventDefault();
-            navigateEditorial('prev');
-        });
-
-        document.getElementById('editorial-next').addEventListener('click', (e) => {
-            e.preventDefault();
-            navigateEditorial('next');
         });
 
         document.getElementById('next-image-btn').addEventListener('click', (e) => {
