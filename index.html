@@ -609,6 +609,7 @@
         #mobile-gallery { display: none; }
         #mobile-sequence-about { display: none; }
         #mobile-video { display: none; }
+        #mobile-intro { display: none; }
 
         @media (max-width: 768px) {
 
@@ -773,6 +774,49 @@
                 box-sizing: border-box;
                 cursor: pointer;
                 touch-action: manipulation;
+            }
+
+            /* Tap-through sequence: opening "intro" frame, shown first on load.
+               Plain background with the headline near the top and a centered
+               "Tap to scroll" prompt. Same layer as the gallery/about steps. */
+            #mobile-intro {
+                display: none;
+                position: fixed;
+                top: 0; left: 0;
+                width: 100%; height: 100vh;
+                z-index: 15;
+                background: var(--bg-color);
+                box-sizing: border-box;
+                padding: 50px 30px 50px 30px;
+                flex-direction: column;
+                cursor: pointer;
+                touch-action: manipulation;
+            }
+
+            #mobile-intro .logo {
+                font-size: 36px;
+                letter-spacing: 3px;
+                margin-bottom: 8px;
+            }
+
+            #mobile-intro .logo-subtitle {
+                font-size: 13px;
+                letter-spacing: 3px;
+                margin-bottom: 0;
+            }
+
+            .mobile-intro-prompt {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                font-family: 'Archivo Expanded', sans-serif;
+                font-size: 14px;
+                font-weight: 200;
+                letter-spacing: 3px;
+                text-transform: uppercase;
+                color: var(--accent-color);
             }
 
             /* Mobile video player */
@@ -1263,6 +1307,18 @@
             <a href="#" id="mobile-video-menu-btn">Menu</a>
         </div>
 
+        <!-- Mobile tap-through sequence: opening "intro" frame, shown first -->
+        <div id="mobile-intro">
+            <div class="mobile-intro-top">
+                <h1 class="logo">Joe Walsh</h1>
+                <p class="logo-subtitle">Creative copywriter</p>
+            </div>
+            <div class="mobile-intro-prompt">
+                <span>Tap to scroll</span>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </div>
+        </div>
+
         <!-- Mobile landing overlay (hidden on desktop) -->
         <div id="mobile-overlay">
             <h1 class="logo">Joe Walsh</h1>
@@ -1293,11 +1349,11 @@
                 <a href="#" class="campaign-link" data-campaign="11" style="display: none;">Oxfam</a>
                 <a href="#" class="campaign-link" data-campaign="6">Lloyds</a>
                 <a href="#" class="campaign-link" data-campaign="2">Dry January</a>
-                <a href="#" class="campaign-link" data-campaign="20">Girls Go STEM</a>
+                <a href="#" class="campaign-link" data-campaign="20" style="display: none;">Girls Go STEM</a>
                 <a href="#" class="campaign-link" data-campaign="15">Miscarriage UK</a>
                 <a href="#" class="campaign-link" data-campaign="14">Port of London</a>
                 <a href="#" class="campaign-link" data-campaign="4">Girls Not Brides</a>
-                <a href="#" class="campaign-link" data-campaign="19">The Gulbenkian Prize</a>
+                <a href="#" class="campaign-link" data-campaign="19" style="display: none;">The Gulbenkian Prize</a>
                 <a href="#" class="campaign-link" data-campaign="5">Amnesty International</a>
                 <a href="#" class="campaign-link" data-campaign="crm" style="margin-top: 1.5em;">CRM</a>
                 <a href="#" class="campaign-link" data-campaign="films">Films</a>
@@ -1900,7 +1956,7 @@
         const MOBILE_SEQUENCE_LAPS = 4;
 
         function buildMobileSequence() {
-            const seq = [];
+            const seq = [{ type: 'intro' }];
             for (let lap = 0; lap < MOBILE_SEQUENCE_LAPS; lap++) {
                 MOBILE_SEQUENCE_CAMPAIGN_ORDER.forEach(id => {
                     const imgs = campaignImages[id];
@@ -1920,13 +1976,20 @@
             const step = mobileSequence[mobileSeqPos];
             const galleryEl = document.getElementById('mobile-gallery');
             const aboutEl = document.getElementById('mobile-sequence-about');
-            if (!step || !galleryEl || !aboutEl) return;
+            const introEl = document.getElementById('mobile-intro');
+            if (!step || !galleryEl || !aboutEl || !introEl) return;
 
-            if (step.type === 'about') {
+            if (step.type === 'intro') {
+                galleryEl.style.display = 'none';
+                aboutEl.style.display = 'none';
+                introEl.style.display = 'flex';
+            } else if (step.type === 'about') {
+                introEl.style.display = 'none';
                 galleryEl.style.display = 'none';
                 aboutEl.style.display = 'block';
                 aboutEl.scrollTop = 0;
             } else {
+                introEl.style.display = 'none';
                 aboutEl.style.display = 'none';
                 showMobileGallery(step.campaignId, step.index);
             }
@@ -1958,6 +2021,11 @@
         });
 
         document.getElementById('mobile-sequence-about').addEventListener('pointerup', (e) => {
+            e.preventDefault();
+            advanceMobileSequence();
+        });
+
+        document.getElementById('mobile-intro').addEventListener('pointerup', (e) => {
             e.preventDefault();
             advanceMobileSequence();
         });
