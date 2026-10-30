@@ -176,6 +176,10 @@
             background: var(--text-color);
         }
 
+        .image-container[data-campaign="social"] {
+            background: var(--text-color);
+        }
+
         /* The About photo has very little headroom above his hair in the
            source file, so a plain center crop trims into it. Anchoring the
            crop to the top instead keeps his hair fully in frame — the extra
@@ -1253,6 +1257,9 @@
             <div class="image-container" data-campaign="crm">
                 <img src="" alt="">
             </div>
+            <div class="image-container" data-campaign="social">
+                <img src="" alt="">
+            </div>
             <div class="video-left-panel" id="video-left-panel">
                 <iframe id="film-iframe" src="" allowfullscreen allow="autoplay" style="pointer-events:none;"></iframe>
                 <div id="film-overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:5;display:none;"></div>
@@ -1349,14 +1356,13 @@
                 <a href="#" class="campaign-link" data-campaign="11" style="display: none;">Oxfam</a>
                 <a href="#" class="campaign-link" data-campaign="6">Lloyds</a>
                 <a href="#" class="campaign-link" data-campaign="2">Dry January</a>
-                <a href="#" class="campaign-link" data-campaign="20" style="display: none;">Girls Go STEM</a>
                 <a href="#" class="campaign-link" data-campaign="15">Miscarriage UK</a>
                 <a href="#" class="campaign-link" data-campaign="14">Port of London</a>
                 <a href="#" class="campaign-link" data-campaign="4">Girls Not Brides</a>
-                <a href="#" class="campaign-link" data-campaign="19" style="display: none;">The Gulbenkian Prize</a>
                 <a href="#" class="campaign-link" data-campaign="5">Amnesty International</a>
                 <a href="#" class="campaign-link" data-campaign="crm" style="margin-top: 1.5em;">CRM</a>
                 <a href="#" class="campaign-link" data-campaign="films">Films</a>
+                <a href="#" class="campaign-link" data-campaign="social">Social</a>
                 <a href="#" class="campaign-link" data-campaign="12">Editorial</a>
             </div>
 
@@ -1391,6 +1397,19 @@
         <a href="#" class="back-link" id="editorial-item-back-btn">&#8592; Back</a>
         <h1 class="detail-title" id="editorial-item-title"></h1>
         <div class="detail-description" id="editorial-item-body"></div>
+    </div>
+
+    <!-- Social item panel — slides in over the Social list when a name is clicked,
+         and otherwise works exactly like a main-menu campaign panel (own title,
+         own body copy, own image gallery with arrows). -->
+    <div class="editorial-item-panel" id="social-item-panel">
+        <a href="#" class="back-link" id="social-item-back-btn">&#8592; Back</a>
+        <h1 class="detail-title" id="social-item-title"></h1>
+        <div class="detail-description" id="social-item-body"></div>
+        <div class="panel-nav-arrows" id="social-item-arrows">
+            <a href="#" class="back-link" id="social-prev-image-btn"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></a>
+            <a href="#" class="back-link" id="social-next-image-btn"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+        </div>
     </div>
 
     <div class="page-overlay" id="about-page">
@@ -1573,6 +1592,7 @@
         '13': '<p style="font-weight: 500;">The Student Housing Company wanted to set itself apart from other student accommodation companies, with digital and in-person touchpoints that would make students feel at home from the very first moment.</p><p>I developed positioning and messaging frameworks, and defined tone of voice and guidelines for full-channel rollout. I managed digital and print copywriting for brand, social and CRM, creating optimised copy for the website blog, email channel (+158% open rate), on-location branding and careers fairs.</p><p>Many of the tenants we’d be speaking to would be living away from home for the first time, navigating a new city and a new life. So the tone needed to flex across a variety of audiences and circumstances, from encouraging students to move in to putting parents’ minds at ease.</p><p>The voice was endearing but not saccharine – one that knew when to raise an eyebrow and when to set levity aside. Surreal touches kept things memorable; a hint of snark gave it an edge. The goal was copy that felt like it was written by a friend, not a brand committee, and the uptick in room applications validated the overhauled brand direction.</p>',
         'films': '<p>I’ve written, storyboarded and creatively directed a number of hero films for a number of companies. I’ve included a few here.</p><div class="film-links"><a href="#" class="film-link" data-vimeo="1184523995">Bang &amp; Olufsen</a><a href="#" class="film-link" data-vimeo="1184524220">Finnair</a><a href="#" class="film-link" data-vimeo="1184524245">Publicis Sapient</a><a href="#" class="film-link" data-vimeo="1184596362">Mastercard</a></div>',
         'crm': '<p>I’ve written or managed a lot of CRM journeys for different organisations, interpreting data to lift open rates, click-throughs and brand engagement. Here are a few examples.</p><div class="crm-links"><a href="#" class="crm-link" data-campaign="16">F1</a><a href="#" class="crm-link" data-campaign="canon">Canon</a><a href="#" class="crm-link" data-campaign="17">Samsung</a><a href="#" class="crm-link" data-campaign="18">Stitched</a></div>',
+            'social': '<p>A few social-first campaigns and platforms I’ve worked on. Here are a few examples.</p><div class="crm-links"><a href="#" class="crm-link" data-campaign="19">The Gulbenkian Prize</a><a href="#" class="crm-link" data-campaign="20">Girls Go STEM</a></div>',
             '14': '<p style="font-weight: 500;">Teenagers keep getting into accidents in and around the Thames, and the Port of London Authority needed to make them think twice about their actions around the water.</p><p>The priority was to reach kids where they were, speaking to them in their own language. So it stood to reason that our social film became the centrepiece of our campaign. I conceptualised and storyboarded a UGC-style film that would be indistinguishable from other teen-made montages (popular on Instagram and TikTok), only to pull the rug with an unforgiving twist – a technical challenge I worked closely with the videographer to achieve.</p><p>The film launched a broader platform, “See the River. See the Risk.”, which consisted of PR outreach, influencer-led social, education packs and OOH assets across 95 sites. With TFL’s support, we also staged a takeover of Waterloo that included life-ring roundels, “Mind the tide” repaints, and station-wide calls to action.</p><p>The campaign reached 100 million parents and teenagers along 95 miles of the tidal Thames, and was featured on both national and regional TV and radio broadcasts.</p>',
             '15': '<p style="font-weight: 500;">Miscarriage is one of the most common pregnancy loss experiences, but it’s still surrounded by silence. Miscarriage UK was looking to create an inclusive platform that better articulated the important role it can play in those feelings of loss.</p><p>Our research uncovered two core, almost competing truths: we needed to speak to the very individual experience of miscarriage, while also reflecting that there’s no need to go through these experiences alone. This strategic principle informed the rebrand, as well as a visual system that symbolised care, connection and trust.</p><p>The colour palette balanced warm tones with lighter pastels, allowing the identity to flex between expansive emotions and quiet moments. Patterns, modular shapes, and colour blocks created a brand that could span varied narratives, while sensitive imagery hinted at a tumult of emotion through texture, light, and soft focus.</p><p>We delivered a new name, brand identity and verbal direction that the organisation could apply consistently across services, fundraising and communications. This identity was rolled out via a new website, brochures, socials, and multiple other digital and physical touchpoints.</p>',
         };
@@ -1832,7 +1852,7 @@
             if (!activeCampaignId) return;
             // While browsing a CRM sub-item (F1/Samsung/Stitched), the gallery being
             // navigated belongs to that item even though the panel itself stays on "crm".
-            const effectiveId = (activeCampaignId === 'crm' && crmGalleryItem) ? crmGalleryItem : activeCampaignId;
+            const effectiveId = ((activeCampaignId === 'crm' || activeCampaignId === 'social') && crmGalleryItem) ? crmGalleryItem : activeCampaignId;
             const imgs = campaignImages[effectiveId];
             const arrows = document.getElementById('panel-arrows');
             if (!imgs) {
@@ -1856,7 +1876,14 @@
                 leftPanel.classList.toggle('play-cursor', isFilmThumb);
             }
             // Show/hide arrows — CRM browses via clicking the project name instead, so no arrows there
-            if (arrows) arrows.style.visibility = (imgs.length > 1 && activeCampaignId !== 'crm') ? 'visible' : 'hidden';
+            const baseArrowsVisible = imgs.length > 1 && activeCampaignId !== 'crm' && activeCampaignId !== 'social';
+            // While the Social item panel is open, it sits on top of (and fully
+            // covers) the main arrows — keep those hidden so they can't flash
+            // into view underneath during the slide-across transition.
+            const socialItemOpen = document.getElementById('social-item-panel').classList.contains('active');
+            if (arrows) arrows.style.visibility = (baseArrowsVisible && !socialItemOpen) ? 'visible' : 'hidden';
+            const socialArrows = document.getElementById('social-item-arrows');
+            if (socialArrows) socialArrows.style.visibility = baseArrowsVisible ? 'visible' : 'hidden';
         }
 
                 // Campaign link click — open right detail panel
@@ -1916,7 +1943,7 @@
                 const campaignId = link.getAttribute('data-campaign');
 
                 // Mobile: close menu drawer, show full-screen image gallery
-                if (window.innerWidth <= 768 && campaignId !== '12' && campaignId !== 'films' && campaignId !== 'crm') {
+                if (window.innerWidth <= 768 && campaignId !== '12' && campaignId !== 'films' && campaignId !== 'crm' && campaignId !== 'social') {
                     if (rightPanel) rightPanel.classList.remove('mobile-open');
                     showMobileGallery(campaignId, 0);
                     return;
@@ -1926,6 +1953,7 @@
                 activeCampaignId = campaignId;
                 currentGalleryIndex = 0;
                 crmGalleryItem = null;
+                document.getElementById('social-item-panel').classList.remove('active');
                 document.getElementById('detail-panel-title').textContent = link.textContent.trim();
                 document.getElementById('right-detail-panel').classList.add('active');
                 if (campaignId === '12') {
@@ -2054,6 +2082,7 @@
             updateGalleryImage();
             crmGalleryItem = null;
             document.getElementById('right-detail-panel').classList.remove('active');
+            document.getElementById('social-item-panel').classList.remove('active');
             activeCampaignId = null;
             closeEditorialPanel();
             // Wait for slide-out animation to finish before resetting content
@@ -2078,28 +2107,37 @@
             cursor.style.opacity = '1';
         }
 
-        document.getElementById('prev-image-btn').addEventListener('click', (e) => {
-            e.preventDefault();
+        function stepGalleryImage(delta) {
             if (!activeCampaignId) return;
-            const effectiveId = (activeCampaignId === 'crm' && crmGalleryItem) ? crmGalleryItem : activeCampaignId;
+            const effectiveId = ((activeCampaignId === 'crm' || activeCampaignId === 'social') && crmGalleryItem) ? crmGalleryItem : activeCampaignId;
             if (!campaignImages[effectiveId]) return;
             stopFilmIfPlaying();
             stopAudioIfPlaying();
             const imgs = campaignImages[effectiveId];
-            currentGalleryIndex = (currentGalleryIndex - 1 + imgs.length) % imgs.length;
+            currentGalleryIndex = (currentGalleryIndex + delta + imgs.length) % imgs.length;
             updateGalleryImage();
+        }
+
+        document.getElementById('prev-image-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            stepGalleryImage(-1);
         });
 
         document.getElementById('next-image-btn').addEventListener('click', (e) => {
             e.preventDefault();
-            if (!activeCampaignId) return;
-            const effectiveId = (activeCampaignId === 'crm' && crmGalleryItem) ? crmGalleryItem : activeCampaignId;
-            if (!campaignImages[effectiveId]) return;
-            stopFilmIfPlaying();
-            stopAudioIfPlaying();
-            const imgs = campaignImages[effectiveId];
-            currentGalleryIndex = (currentGalleryIndex + 1) % imgs.length;
-            updateGalleryImage();
+            stepGalleryImage(1);
+        });
+
+        // Social item panel has its own arrow buttons (the main ones sit in the
+        // panel underneath, covered while this one is open) — same navigation.
+        document.getElementById('social-prev-image-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            stepGalleryImage(-1);
+        });
+
+        document.getElementById('social-next-image-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            stepGalleryImage(1);
         });
 
 
@@ -2116,6 +2154,15 @@
                 crmImgEl.src = campaignImages['16'][0];
                 const pos = imagePositions['16'] && imagePositions['16'][0];
                 crmImgEl.style.objectPosition = pos || 'center center';
+            }
+
+            // Social's own "homepage" image reuses the first Gulbenkian Prize
+            // image rather than duplicating that base64 data — set it once here.
+            const socialImgEl = document.querySelector('.image-container[data-campaign="social"] img');
+            if (socialImgEl && campaignImages['19'] && campaignImages['19'][0]) {
+                socialImgEl.src = campaignImages['19'][0];
+                const pos = imagePositions['19'] && imagePositions['19'][0];
+                socialImgEl.style.objectPosition = pos || 'center center';
             }
         });
 
@@ -2381,15 +2428,75 @@
             document.querySelectorAll('.image-container').forEach(c => c.classList.remove('active'));
             const fallback = crmGalleryItem
                 ? document.querySelector(`.image-container[data-campaign="${crmGalleryItem}"]`)
-                : document.querySelector('.image-container[data-campaign="crm"]');
+                : document.querySelector(`.image-container[data-campaign="${activeCampaignId}"]`);
             if (fallback) fallback.classList.add('active');
+        });
+
+        // Social sub-links (Gulbenkian Prize, Girls Go STEM) don't preview on
+        // hover — each opens its own full panel on click — but they should still
+        // fill the cursor on hover like every other link on the site.
+        document.querySelector('.detail-description').addEventListener('mouseover', (e) => {
+            const link = e.target.closest('.crm-link');
+            if (!link || activeCampaignId !== 'social') return;
+            cursor.classList.add('hover');
+        });
+
+        document.querySelector('.detail-description').addEventListener('mouseout', (e) => {
+            const link = e.target.closest('.crm-link');
+            if (!link || activeCampaignId !== 'social') return;
+            cursor.classList.remove('hover');
+        });
+
+        // Social item panel — unlike CRM, each Social sub-link (Gulbenkian Prize,
+        // Girls Go STEM) opens its own full panel that slides over the Social list,
+        // with its own title, body copy and image gallery — exactly like clicking
+        // that project from the main menu.
+        function openSocialItemPanel(campId, label) {
+            stopFilmIfPlaying();
+            stopAudioIfPlaying();
+            activeCampaignId = campId;
+            currentGalleryIndex = 0;
+            crmGalleryItem = null;
+            document.getElementById('social-item-title').textContent = label;
+            document.getElementById('social-item-body').innerHTML = campaignCopy[campId] || '';
+            document.querySelectorAll('.image-container').forEach(c => c.classList.remove('active'));
+            const targetContainer = document.querySelector(`.image-container[data-campaign="${campId}"]`);
+            if (targetContainer) targetContainer.classList.add('active');
+            // Mark the panel active before updating the gallery, so the arrows
+            // visibility check below already knows it's covering the main panel.
+            document.getElementById('social-item-panel').classList.add('active');
+            updateGalleryImage();
+        }
+
+        function closeSocialItemPanel() {
+            document.getElementById('social-item-panel').classList.remove('active');
+            stopFilmIfPlaying();
+            stopAudioIfPlaying();
+            activeCampaignId = 'social';
+            currentGalleryIndex = 0;
+            crmGalleryItem = null;
+            document.querySelectorAll('.image-container').forEach(c => c.classList.remove('active'));
+            const socialContainer = document.querySelector('.image-container[data-campaign="social"]');
+            if (socialContainer) socialContainer.classList.add('active');
+            updateGalleryImage();
+        }
+
+        document.getElementById('social-item-back-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            closeSocialItemPanel();
         });
 
         document.querySelector('.detail-description').addEventListener('click', (e) => {
             const link = e.target.closest('.crm-link');
-            if (!link || activeCampaignId !== 'crm') return;
+            if (!link || activeCampaignId !== 'crm' && activeCampaignId !== 'social') return;
             e.preventDefault();
             const campId = link.getAttribute('data-campaign');
+
+            if (activeCampaignId === 'social') {
+                openSocialItemPanel(campId, link.textContent.trim());
+                return;
+            }
+
             const imgs = campaignImages[campId];
             if (!imgs) return;
             // Hover already previews image 1, so the first click should land on image 2
